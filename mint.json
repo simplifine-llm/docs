@@ -2,28 +2,28 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Simplifine",
   "logo": {
-    "dark": "/logo/dark.svg",
+    "dark": "/logo/Logo.jpg",
     "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#7437BC",
+    "light": "#f5b5f9",
+    "dark": "#7437BC",
     "anchors": {
       "from": "#0D9373",
-      "to": "#07C983"
+      "to": "#f5b5f9"
     }
   },
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:founders@simplifine.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Create Account",
+    "url": "https://www.simplifine.com/signup"
   },
   "tabs": [
     {
@@ -60,8 +60,7 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "quickstart"
       ]
     }
   ],
