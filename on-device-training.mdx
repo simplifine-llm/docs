@@ -12,12 +12,6 @@ This section shows how to use Simplifine to train an LLM for supervised fine-tun
 
 There are 3 main configurations that are passed to a simplfiine trainer function. The SFTConfig from huggingface's trl library, the prompt config indicating the prompt template, response tempalte and so on, and the wandb config for logging. 
 
-`wandb_api_key:str` Your unique API key for authenticating with the Weights and Biases (wandb) platform.
-
-`project:str` The name of the wandb project where your experiment will be logged.
-
-`config:dict` A dictionary containing configuration parameters for your experiment, such as hyperparameters, settings, or any other key-value pairs relevant to your run.
-
 ## Dataset Configuration
 ### Using a Hugging Face Dataset
 You can provide the name of a Hugging Face (HF) dataset if you'd like to use a pre-existing dataset. Ensure that you adjust the `keys`, `response_template`, and `template` to match your dataset's structure.
