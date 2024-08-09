@@ -1,4 +1,5 @@
 {
+  "feedback.thumbsRating": true,
   "$schema": "https://mintlify.com/schema.json",
   "name": "Simplifine",
   "logo": {
@@ -89,4 +90,6 @@
     "github": "https://github.com/mintlify",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
   }
+
+  
 }
