@@ -1,5 +1,4 @@
 {
-  "feedback.thumbsRating": true,
   "$schema": "https://mintlify.com/schema.json",
   "name": "Simplifine",
   "logo": {
@@ -26,13 +25,13 @@
       "url": "https://discord.gg/QYp669Suap"
     },
     {
-      "name": "Website",
-      "url": "www.simplifine.com"
+      "name": "Github",
+      "url": "https://github.com/simplifine-llm/Simplifine"
     }
   ],
   "topbarCtaButton": {
-    "name": "Github",
-    "url": "https://github.com/simplifine-llm/Simplifine"
+    "name": "Request Free Cloud Credits",
+    "url": "https://www.simplifine.com/api-key-interest"
   },
   "tabs": [
     {
@@ -86,9 +85,8 @@
 
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "github": "https://github.com/simplifine-llm/Simplifine",
+    "linkedin": "https://www.linkedin.com/company/100529065"
   }
 
   
