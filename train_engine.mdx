@@ -1,0 +1,48 @@
+```python
+train_engine.sft_train(
+model_name:str,
+dataset_name:str=None,
+dataset_config_name:str=None,
+data_from_hf:bool=True,
+hf_token:str='',
+data:dict={},
+do_split:bool=True,
+split_ratio:float=0.2,
+use_peft:bool=False,
+lora_config:LoraConfig=None, 
+sft_config:SFTConfig=None,
+wandb_config:wandbConfig=None,
+use_ddp:bool=False,
+use_zero:bool=False,
+sft_prompt_config:sftPromptConfig=None
+):
+```
+
+`model_name`: name of the model that will be trained. This needs to be available on huggingface.
+
+`dataset_name`: name of the dataset, if the intent is to use a dataset on huggingface. 
+
+`dataset_config_name`: config name of the dataset loaded from huggingface. provide this only if the dataset you are using has multiple configs. 
+
+`data_from_hf`: boolean indicating if the dataset is given via the `data` arguement or is to be loaded from huggingface (`True`).
+
+`hf_token`: the huggingface token you have, which might be required to access gated models and datasets.
+
+`data`: custom data, provided as a dictionary. If you are using your own data, make sure to set `data_from_hf = False`. 
+
+`do_split`: If the dataset should be split. This uses a train test split.
+
+`split_ratio`: The ratio of the train test split.
+
+`use_peft`: If the model is to be trained using LoRA.
+
+`lora_config`: The LoRA config (from huggingface's PEFT library) object.
+
+`sft_config`: The `SFTConfig` from huggingface's trl library.
+
+`wandb_config`: The wandb config. look through different configs for documentation. 
+
+`use_ddp`: to use data distributed parallelism or no.
+
+`use_zero`: to use deepspeed's ZeRO or no. If you set `use_zero=True`, then you must pass either a path to a deepspeed config file in the deepspeed arguement in SFTConfig, or giving it as a python dictionary.
+e.g. `sft_config = SFTConfig(deepspeed = 'path/to/config'`.
