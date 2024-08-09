@@ -1,0 +1,84 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Simplifine",
+  "logo": {
+    "dark": "/logo/simplifine dark background.jpeg",
+    "light": "logo/simplifine logo.jpeg"
+  },
+  "favicon": "logo/siimplifine logo solo.jpeg",
+  "colors": {
+    "primary": "#7437BC",
+    "light": "#f5b5f9",
+    "dark": "#7437BC",
+    "anchors": {
+      "from": "#0D9373",
+      "to": "#f5b5f9"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:founders@simplifine.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Create Account",
+    "url": "https://www.simplifine.com/signup"
+  },
+  "tabs": [
+    {
+      "name": "License",
+      "url": "license/license.mdx"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "quickstart",
+        "simplifine-cloud-setup",
+        "on-device-training"
+      ]
+    },
+    {
+    "group": "Training",
+     "pages": [
+        "training/sft_train",
+        "training/hf_sft", 
+        "training/clm_train",
+        "training/hf_clm_train",
+        "training/hf_clf_multi_label_train",
+        "training/hf_clf_train",
+        "training/hf_finetune_llm_qa"
+        ]
+      },
+    {
+      "group": "Evaluation",
+      "pages": [
+        "Start"
+        ]
+      },
+    {
+      "group": "Inference",
+      "pages": [
+        "inference/generate_from_pretrained"
+        ]
+      },
+    {
+      "group": "Cloud", 
+      "pages": [
+        "cloud/client",
+        "cloud/sft_train_cloud",
+        "cloud/clm_train_cloud"
+        ]
+      },
+    {"group": "API", "pages": ["Start"]},
+    {"group": "Troubleshooting", "pages": ["Start"]}
+
+  ],
+  "footerSocials": {
+    "x": "https://x.com/mintlify",
+    "github": "https://github.com/mintlify",
+    "linkedin": "https://www.linkedin.com/company/mintsearch"
+  }
+}

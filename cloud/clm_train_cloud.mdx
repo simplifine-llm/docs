@@ -1,0 +1,75 @@
+---
+title: "Cloud-Based Causal Language Modeling Training"
+description: "Learn about the `clm_train_cloud` function within Simplifine's Train Engine for training models in the cloud"
+---
+
+```python
+client.clm_train_cloud(
+    self, 
+    job_name:str,
+    model_name:str, 
+    dataset_name:str=None, 
+    hf_token:str='', 
+    dataset_config_name:str=None, 
+    data_from_hf:bool=True,
+    do_split:bool=True, 
+    split_ratio:float=0.2, 
+    use_peft:bool=False, 
+    lora_config:LoraConfig=None, 
+    train_args:TrainingArguments=None, 
+    data:dict={}, 
+    wandb_config:wandbConfig=None, 
+    use_ddp:bool=False, 
+    use_zero:bool=True, 
+    prompt_config:PromptConfig=None
+)
+```
+
+<ParamField path="job_name" type="string" required="true">
+  The name of the training job.
+</ParamField>
+<ParamField path="model_name" type="string" required="true">
+  The name or path of the pre-trained model to use.
+</ParamField>
+<ParamField path="dataset_name" type="string">
+  The name of the dataset to be used for training. _Defaults to `None`._
+</ParamField>
+<ParamField path="hf_token" type="string">
+  The Hugging Face token required for accessing private datasets or models. _Defaults to an empty string._
+</ParamField>
+<ParamField path="dataset_config_name" type="string">
+  The configuration name of the dataset, if applicable. _Defaults to `None`._
+</ParamField>
+<ParamField path="data_from_hf" type="boolean">
+  A flag to determine whether to load data from Hugging Face. _Defaults to `True`._
+</ParamField>
+<ParamField path="do_split" type="boolean">
+  A flag to determine whether to split the dataset into training and validation sets. _Defaults to `True`._
+</ParamField>
+<ParamField path="split_ratio" type="float">
+  The ratio of the dataset to be used for validation. _Defaults to `0.2`._
+</ParamField>
+<ParamField path="use_peft" type="boolean">
+  A flag to enable Parameter-Efficient Fine-Tuning (PEFT). _Defaults to `False`._
+</ParamField>
+<ParamField path="lora_config" type="LoraConfig">
+  The configuration for LoRA (Low-Rank Adaptation) if `use_peft` is `True`. _Defaults to `None`._
+</ParamField>
+<ParamField path="train_args" type="TrainingArguments">
+  The training arguments to customize the training process. _Defaults to `None`._
+</ParamField>
+<ParamField path="data" type="dict">
+  A dictionary containing the training data. _Defaults to an empty dictionary._
+</ParamField>
+<ParamField path="wandb_config" type="wandbConfig">
+  The configuration for Weights and Biases (WandB) logging. _Defaults to `None`._
+</ParamField>
+<ParamField path="use_ddp" type="boolean">
+  A flag to enable Distributed Data Parallel (DDP) training. _Defaults to `False`._
+</ParamField>
+<ParamField path="use_zero" type="boolean">
+  A flag to enable ZeRO (Zero Redundancy Optimizer) for memory optimization. _Defaults to `True`._
+</ParamField>
+<ParamField path="prompt_config" type="PromptConfig">
+  The configuration for prompts used in the training. _Defaults to `None`._
+</ParamField>

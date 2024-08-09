@@ -1,0 +1,114 @@
+---
+title: "Hugging Face Causal Language Model Training"
+description: "Learn about the `hf_clm_train` function within Simplifine's Train Engine"
+---
+
+```python
+def hf_clm_train(
+    model_name:str='', 
+    dataset_name:str="",
+    context_length:int=128, 
+    data:list=[],
+    num_epochs:int=3, 
+    batch_size:int=8, 
+    fp16:bool=False, 
+    bf16:bool=False,
+    lr:float=5e-5, 
+    from_hf:bool=True, 
+    do_split:bool=True, 
+    split_ratio:float=0.2,
+    gradient_accumulation_steps:int=4, 
+    gradient_checkpointing:bool=False,
+    report_to:str='none', 
+    wandb_api_key:str='', 
+    wandb_config:wandbConfig=None,
+    use_peft:bool=False, 
+    peft_config=None, 
+    hf_token:str='',
+    hf_column:str='text', 
+    lr_scheduler_type:str='linear', 
+    eval_accumulation_steps:int=8,
+    output_dir:str='clm_output', 
+    ddp:bool=False, 
+    zero:bool=True
+):
+```
+
+<ParamField path="model_name" type="string" required="true">
+  The name or path of the pre-trained model to use.
+</ParamField>
+<ParamField path="dataset_name" type="string">
+  The name of the dataset to be used for training. _Defaults to an empty string._
+</ParamField>
+<ParamField path="context_length" type="int">
+  The maximum length of the input sequences. _Defaults to `128`._
+</ParamField>
+<ParamField path="data" type="list">
+  A list of strings to use as data if `from_hf` is `False`. _Defaults to an empty list._
+</ParamField>
+<ParamField path="num_epochs" type="int">
+  The number of training epochs. _Defaults to `3`._
+</ParamField>
+<ParamField path="batch_size" type="int">
+  The batch size for training. _Defaults to `8`._
+</ParamField>
+<ParamField path="fp16" type="boolean">
+  A flag to enable 16-bit floating-point (FP16) training. _Defaults to `False`._
+</ParamField>
+<ParamField path="bf16" type="boolean">
+  A flag to enable 16-bit Brain Floating Point (BF16) training. _Defaults to `False`._
+</ParamField>
+<ParamField path="lr" type="float">
+  The learning rate for optimization. _Defaults to `5e-5`._
+</ParamField>
+<ParamField path="from_hf" type="boolean">
+  A flag to determine whether to load the dataset from Hugging Face. _Defaults to `True`._
+</ParamField>
+<ParamField path="do_split" type="boolean">
+  A flag to determine whether to split the dataset into training and validation sets. _Defaults to `True`._
+</ParamField>
+<ParamField path="split_ratio" type="float">
+  The ratio of the dataset to be used for validation. _Defaults to `0.2`._
+</ParamField>
+<ParamField path="gradient_accumulation_steps" type="int">
+  The number of steps for gradient accumulation. _Defaults to `4`._
+</ParamField>
+<ParamField path="gradient_checkpointing" type="boolean">
+  A flag to enable gradient checkpointing for reducing memory usage. _Defaults to `False`._
+</ParamField>
+<ParamField path="report_to" type="string">
+  The service to report training logs to (e.g., `wandb`). _Defaults to `'none'`._
+</ParamField>
+<ParamField path="wandb_api_key" type="string">
+  The API key for Weights and Biases (WandB) logging. _Defaults to an empty string._
+</ParamField>
+<ParamField path="wandb_config" type="wandbConfig">
+  The configuration for Weights and Biases (WandB) logging. _Defaults to `None`._
+</ParamField>
+<ParamField path="use_peft" type="boolean">
+  A flag to enable Parameter-Efficient Fine-Tuning (PEFT). _Defaults to `False`._
+</ParamField>
+<ParamField path="peft_config" type="object">
+  The configuration object for PEFT. _Defaults to `None`._
+</ParamField>
+<ParamField path="hf_token" type="string">
+  The Hugging Face token required for accessing private datasets or models. _Defaults to an empty string._
+</ParamField>
+<ParamField path="hf_column" type="string">
+  The name of the column in the dataset to use for training. _Defaults to `'text'`._
+</ParamField>
+<ParamField path="lr_scheduler_type" type="string">
+  The type of learning rate scheduler to use. _Defaults to `'linear'`._
+</ParamField>
+<ParamField path="eval_accumulation_steps" type="int">
+  The number of steps for evaluation accumulation. _Defaults to `8`._
+</ParamField>
+<ParamField path="output_dir" type="string">
+  The directory to save the output model and logs. _Defaults to `'clm_output'`._
+</ParamField>
+<ParamField path="ddp" type="boolean">
+  A flag to enable Distributed Data Parallel (DDP) training. _Defaults to `False`._
+</ParamField>
+<ParamField path="zero" type="boolean">
+  A flag to enable ZeRO (Zero Redundancy Optimizer) for memory optimization. _Defaults to `True`._
+</ParamField>

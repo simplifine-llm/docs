@@ -1,0 +1,37 @@
+---
+title: "Hugging Face Fine-Tuning for Question Answering"
+description: "Learn about the `hf_finetune_llm_qa` function within Simplifine's Train Engine"
+---
+
+```python
+hf_finetune_llm_qa(
+    model_name:str, 
+    dataset_name:str='', 
+    from_hf:bool=False, 
+    queries:list=[], 
+    context:list=[], 
+    answers:list=[], 
+    hf_token:str=''
+):
+```
+<ParamField path="model_name" type="string" required="true">
+  The name or path of the pre-trained model to use.
+</ParamField>
+<ParamField path="dataset_name" type="string">
+  The name of the dataset to be used for fine-tuning. _Defaults to an empty string._
+</ParamField>
+<ParamField path="from_hf" type="boolean">
+  A flag to determine whether to load the dataset from Hugging Face. _Defaults to `False`._
+</ParamField>
+<ParamField path="queries" type="list">
+  A list of questions (queries) for fine-tuning the model. _Defaults to an empty list._
+</ParamField>
+<ParamField path="context" type="list">
+  A list of contexts related to the queries. _Defaults to an empty list._
+</ParamField>
+<ParamField path="answers" type="list">
+  A list of answers corresponding to the queries. _Defaults to an empty list._
+</ParamField>
+<ParamField path="hf_token" type="string">
+  The Hugging Face token required for accessing private datasets or models. _Defaults to an empty string._
+</ParamField>

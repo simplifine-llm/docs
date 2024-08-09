@@ -1,0 +1,15 @@
+---
+title: "Cloud Client"
+description: "Learn about the `Client` class within Simplifine's cloud training platform to establish a connection with the cloud server."
+---
+
+```python
+client(api_key:str='', gpu_type:str='')
+```
+
+<ParamField path="api_key" type="string" required="true">
+  The Simplifine API key used to authenticate the client. If not provided, an exception is raised.
+</ParamField>
+<ParamField path="gpu_type" type="string">
+  The type of GPU to be used for training. Accepted values are `"a100"` and `"l4"`. If not recognized, the default L4 server is used. _Defaults to `"l4"`._
+</ParamField>

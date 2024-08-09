@@ -1,0 +1,25 @@
+---
+title: "Generate Text from A Pretrained Model"
+description: "Learn about the `generate_from_pretrained` function within Simplifine's Inference Tools"
+---
+
+```python
+def generate_from_pretrained(
+    model:AutoModelForCausalLM, 
+    tokenizer:AutoTokenizer, 
+    generate_confg:GenerationConfig,
+    data:dict={}
+):
+```
+<ParamField path="model" type="AutoModelForCausalLM" required="true">
+  The pre-trained causal language model to use for text generation.
+</ParamField>
+<ParamField path="tokenizer" type="AutoTokenizer" required="true">
+  The tokenizer corresponding to the pre-trained model.
+</ParamField>
+<ParamField path="generate_confg" type="GenerationConfig" required="true">
+  The configuration settings for text generation.
+</ParamField>
+<ParamField path="data" type="dict">
+  A dictionary containing any additional data required for text generation. _Defaults to an empty dictionary._
+</ParamField>

@@ -1,0 +1,138 @@
+---
+title: "Supervised Fine-Tuning with Hugging Face"
+description: "Learn about the `hf_sft` function within Simplifine's Train Engine"
+---
+
+```python
+hf_sft(
+    model_name:str, 
+    dataset_name:str='nlpie/pandemic_pact',
+    keys:list=[], 
+    template:str='', 
+    do_split:bool=True, 
+    split_ratio:float=0.2, 
+    load_eval_from_data:bool=False, 
+    data:dict={}, 
+    num_epochs:int=3, 
+    batch_size:int=1, 
+    wandb_api_key:str='',
+    lr:float=5e-5, 
+    from_hf:bool=True, 
+    response_template:str='### Answer:', 
+    eval_steps:int=10, 
+    logging_steps:int=10,
+    use_peft:bool=False, 
+    peft_config=None, 
+    ddp:bool=False, 
+    zero:bool=True, 
+    deepspeed_config:str='home/ubuntu/src/zero_config.json',
+    hf_token:str='', 
+    gradient_accumulation_steps:int=1, 
+    fp16:bool=False, 
+    bf16:bool=False, 
+    report_to:str='none',
+    gradient_checkpointing:bool=False, 
+    max_seq_length:int=2048, 
+    use_wandb:bool=False, 
+    output_dir:str='sft_output', 
+    eval_accumulation_steps:int=8, 
+    wandb_config:wandbConfig=None
+):
+```
+
+<ParamField path="model_name" type="string" required="true">
+  The name or path of the pre-trained model to use.
+</ParamField>
+<ParamField path="dataset_name" type="string">
+  The name of the dataset to use for training. _Defaults to `'nlpie/pandemic_pact'`._
+</ParamField>
+<ParamField path="keys" type="list">
+  List of keys used for formatting prompts in the template. _Defaults to an empty list._
+</ParamField>
+<ParamField path="template" type="string">
+  Template string for formatting prompts with keys. _Defaults to an empty string._
+</ParamField>
+<ParamField path="do_split" type="boolean">
+  A flag to determine whether to split the dataset into training and validation sets. _Defaults to `True`._
+</ParamField>
+<ParamField path="split_ratio" type="float">
+  The ratio of the dataset to be used for validation. _Defaults to `0.2`._
+</ParamField>
+<ParamField path="load_eval_from_data" type="boolean">
+  A flag to determine whether to load evaluation data from the provided dataset. _Defaults to `False`._
+</ParamField>
+<ParamField path="data" type="dict">
+  A dictionary containing the training data. _Defaults to an empty dictionary._
+</ParamField>
+<ParamField path="num_epochs" type="int">
+  The number of training epochs. _Defaults to `3`._
+</ParamField>
+<ParamField path="batch_size" type="int">
+  The batch size for training. _Defaults to `1`._
+</ParamField>
+<ParamField path="wandb_api_key" type="string">
+  The API key for Weights and Biases (WandB) logging. _Defaults to an empty string._
+</ParamField>
+<ParamField path="lr" type="float">
+  The learning rate for optimization. _Defaults to `5e-5`._
+</ParamField>
+<ParamField path="from_hf" type="boolean">
+  A flag to determine whether to load the dataset from Hugging Face. _Defaults to `True`._
+</ParamField>
+<ParamField path="response_template" type="string">
+  Template string for response formatting. _Defaults to `'### Answer:'`._
+</ParamField>
+<ParamField path="eval_steps" type="int">
+  The number of steps between evaluations. _Defaults to `10`._
+</ParamField>
+<ParamField path="logging_steps" type="int">
+  The number of steps between logging outputs. _Defaults to `10`._
+</ParamField>
+<ParamField path="use_peft" type="boolean">
+  A flag to enable Parameter-Efficient Fine-Tuning (PEFT). _Defaults to `False`._
+</ParamField>
+<ParamField path="peft_config" type="object">
+  The configuration object for PEFT. _Defaults to `None`._
+</ParamField>
+<ParamField path="ddp" type="boolean">
+  A flag to enable Distributed Data Parallel (DDP) training. _Defaults to `False`._
+</ParamField>
+<ParamField path="zero" type="boolean">
+  A flag to enable ZeRO (Zero Redundancy Optimizer) for memory optimization. _Defaults to `True`._
+</ParamField>
+<ParamField path="deepspeed_config" type="string">
+  The path to the DeepSpeed configuration file. _Defaults to `'home/ubuntu/src/zero_config.json'`._
+</ParamField>
+<ParamField path="hf_token" type="string">
+  The Hugging Face token required for accessing private datasets or models. _Defaults to an empty string._
+</ParamField>
+<ParamField path="gradient_accumulation_steps" type="int">
+  The number of steps for gradient accumulation. _Defaults to `1`._
+</ParamField>
+<ParamField path="fp16" type="boolean">
+  A flag to enable 16-bit floating-point (FP16) training. _Defaults to `False`._
+</ParamField>
+<ParamField path="bf16" type="boolean">
+  A flag to enable 16-bit Brain Floating Point (BF16) training. _Defaults to `False`._
+</ParamField>
+<ParamField path="report_to" type="string">
+  The service to report training logs to (e.g., `wandb`). _Defaults to `'none'`._
+</ParamField>
+<ParamField path="gradient_checkpointing" type="boolean">
+  A flag to enable gradient checkpointing for reducing memory usage. _Defaults to `False`._
+</ParamField>
+<ParamField path="max_seq_length" type="int">
+  The maximum sequence length for the input data. _Defaults to `2048`._
+</ParamField>
+<ParamField path="use_wandb" type="boolean">
+  A flag to enable Weights and Biases (WandB) logging. _Defaults to `False`._
+</ParamField>
+<ParamField path="output_dir" type="string">
+  The directory to save the output model and logs. _Defaults to `'sft_output'`._
+</ParamField>
+<ParamField path="eval_accumulation_steps" type="int">
+  The number of steps for evaluation accumulation. _Defaults to `8`._
+</ParamField>
+<ParamField path="wandb_config" type="wandbConfig">
+  The configuration for Weights and Biases (WandB) logging. _Defaults to `None`._
+</ParamField>

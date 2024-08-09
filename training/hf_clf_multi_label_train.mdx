@@ -1,0 +1,62 @@
+---
+title: "Hugging Face Multi-Label Classification Training"
+description: "Learn about the `hf_clf_multi_label_train` function within Simplifine's Train Engine"
+---
+
+```python
+hf_clf_multi_label_train(
+    model_name:str, 
+    dataset_name:str='', 
+    num_epochs:int=3, 
+    batch_size:int=8, 
+    lr:float=5e-5, 
+    from_hf:bool=True,
+    inputs:list=[], 
+    labels:list=[],
+    use_peft:bool=False, 
+    peft_config=None,
+    accelerator=None, 
+    apply_class_weights:bool=False,
+    num_labels:int=0
+)
+```
+
+<ParamField path="model_name" type="string" required="true">
+  The name or path of the pre-trained model to use.
+</ParamField>
+<ParamField path="dataset_name" type="string">
+  The name of the dataset to be used for training. _Defaults to an empty string._
+</ParamField>
+<ParamField path="num_epochs" type="int">
+  The number of training epochs. _Defaults to `3`._
+</ParamField>
+<ParamField path="batch_size" type="int">
+  The batch size for training. _Defaults to `8`._
+</ParamField>
+<ParamField path="lr" type="float">
+  The learning rate for optimization. _Defaults to `5e-5`._
+</ParamField>
+<ParamField path="from_hf" type="boolean">
+  A flag to determine whether to load the dataset from Hugging Face. _Defaults to `True`._
+</ParamField>
+<ParamField path="inputs" type="list">
+  A list of input data for training. _Defaults to an empty list._
+</ParamField>
+<ParamField path="labels" type="list">
+  A list of labels for training. _Defaults to an empty list._
+</ParamField>
+<ParamField path="use_peft" type="boolean">
+  A flag to enable Parameter-Efficient Fine-Tuning (PEFT). _Defaults to `False`._
+</ParamField>
+<ParamField path="peft_config" type="object">
+  The configuration object for PEFT. _Defaults to `None`._
+</ParamField>
+<ParamField path="accelerator" type="object">
+  The accelerator object for distributed training. _Defaults to `None`._
+</ParamField>
+<ParamField path="apply_class_weights" type="boolean">
+  A flag to apply class weights to handle imbalanced datasets. _Defaults to `False`._
+</ParamField>
+<ParamField path="num_labels" type="int">
+  The number of labels in the dataset. _Defaults to `0`._
+</ParamField>

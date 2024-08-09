@@ -1,0 +1,56 @@
+---
+title: Quickstart
+description: "Simplifine is an open-source Python library designed to streamline the fine-tuning of large language models (LLMs). From training to evaluation to serving, we got your back!"
+icon: "rocket"
+---
+
+## Installation
+To get started with Simplifine, you need to install the library. You can do this easily using pip:
+
+```python
+pip install simplifine-alpha
+```
+
+To get access to the most up-to-date features, you can install the library from the GitHub repository:
+```python
+pip install git+https://github.com/simplifine-llm/Simplifine.git
+```
+<Warning>Python 3.7 or later required. </Warning>
+
+<Warning>For any issues installing, email <a href="mailto:founders@simplifine.com">founders@simplifine.com</a>. We will get you set up ASAP. </Warning>
+
+<Accordion
+  title="Troubleshooting"
+>
+  ### `RuntimeError: Error building extension 'cpu_adam' python dev`
+  This happens when python-dev is not installed and offload is being used by ZeRO. simple try:
+
+  ``` bash
+  apt-get install python3-dev
+  ```
+
+</Accordion>
+
+## Cloud API Key Setup (Optional)
+To use Simplifine's cloud compute for training, you need to set up an API key.
+For this, you need to create an account on [Simplifine](https://app.simplifine.com/).
+
+<Note>You can use Simplifine without an API Key for any on-device job.</Note>
+
+
+<CardGroup>
+
+<Card title="License" icon="file" href="/license/license">
+  We are GNU GPL 3.0 licensed. Check out our license for more details.
+</Card>
+
+<Card
+  title="Contribute to our Community"
+  icon="github"
+  href="https://github.com/simplifine-llm/Simplifine"
+>
+  Join our community and contribute to our open-source project to make LLM fine-tuning accessible to everyone.
+</Card>
+
+
+</CardGroup>
