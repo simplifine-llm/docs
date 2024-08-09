@@ -1,0 +1,53 @@
+### WandB Config
+
+```python
+class wandbConfig:
+    wandb_api_key:str
+    project:str
+    config:dict
+```
+
+`wandb_api_key:str` Your unique API key for authenticating with the Weights and Biases (wandb) platform.
+
+`project:str` The name of the wandb project where your experiment will be logged.
+
+`config:dict` A dictionary containing configuration parameters for your experiment, such as hyperparameters, settings, or any other key-value pairs relevant to your run.
+
+### Prompt Config
+
+```python
+class PromptConfig:
+    new_padding_token: Optional[str] = None
+    use_chat_template: Optional[bool] = False
+    system_message_key: Optional[str] = None
+    system_message: Optional[str] = None
+    clm_column: Optional[str] = None
+    context_length: Optional[int] = 1024
+```
+
+`new_padding_token`: A new padding token that will be added to the tokenizer (e.g. <PAD>). Note that this might need some fine-tuning or it might cause unexpected behaviour.
+
+`use_chat_template`: If a chat tempalte will be used. This is usefull to include a system message, a user message and have the response after response tempalte (in supervised fine tuning) to be the assistant's response.
+
+`system_message_key`: The key in the dataset that indicates which key should be used as a system message. Useful in SFT.
+
+`system_message`: The string that would be used as the system message. Note: provide either system_message or system_message_key.
+
+`clm_column`: Causal Language Modelling (CLM) column. This is the column from which the text to train for CLM will be extracted. 
+
+`context_length`: For CLM, the context length for the pre-processing of text. 
+
+### SFT Prompt Config
+
+```python
+class sftPromptConfig(PromptConfig):
+    keys: List[str] = field(default_factory=list)
+    template: str = ""
+    response_template: str = ""
+```
+
+`keys`: the keys from the dataset that would be used to populate the SFT template.
+
+`template`: the prompt template used for SFT (e.g. `"### QUESTION {question}, ###ANSWER: {answer}"`). This will be formated by the keys provided. 
+
+`response_template`: The tempalte used to train the LLM for SFT. (e.g. `###ANSWER`).
