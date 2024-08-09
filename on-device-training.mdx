@@ -4,13 +4,9 @@ description: "Learn how to train models on your device using Simplifine."
 icon: "computer"
 ---
 
-<Note>
-Note: This workflow is specifically designed for cloud-based training. For on-device training, refer to the On-Device Training Workflow section.
-</Note>
+## On-device training
 
-## Cloud-Based Training with `train_engine`
-
-This workflow is optimized for cloud environments where resources are managed dynamically, allowing you to focus on fine-tuning without worrying about hardware limitations.
+This section shows how to use Simplifine to train an LLM for supervised fine-tuning on-device. 
 
 ```python
 from simplifine_alpha import train_engine
@@ -18,17 +14,9 @@ import wandb
 import os
 ```
 
-## Disable WandB Logging (Optional)
-If you don't need to track your training process with Weights and Biases (WandB), you can disable it using the following code.
+## Config objects for simplifine
 
-<Note>
-To enable WandB logging, you'll need a WandB token. Change the mode to 'enabled' if you'd like to activate logging.
-</Note>
-
-``` python
-# Disabling WandB logging, change if you'd like to have it enabled.
-wandb.init(mode='disabled')
-```
+There are 3 main configurations that are passed to a simplfiine trainer function. The SFTConfig from huggingface's trl library, the prompt config indicating the prompt template, response tempalte and so on, and the wandb config for logging. 
 
 ## Dataset Configuration
 ### Using a Hugging Face Dataset
