@@ -19,11 +19,19 @@
     {
       "name": "Support",
       "url": "mailto:founders@simplifine.com"
+    },
+    {
+      "name": "Discord",
+      "url": "https://discord.gg/QYp669Suap"
+    },
+    {
+      "name": "Website",
+      "url": "www.simplifine.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Create Account",
-    "url": "https://www.simplifine.com/signup"
+    "name": "Github",
+    "url": "https://github.com/simplifine-llm/Simplifine"
   },
   "tabs": [
     {

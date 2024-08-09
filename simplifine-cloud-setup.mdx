@@ -1,81 +1,152 @@
 ---
-title: 'Cloud Training'
-description: "Learn how to train models on Simplifine's cloud."
+title: 'Cloud Training Quickstart'
+description: "Welcome to the Cloud Quickstart guide for Simplifine's Train Engine. This guide will help you get up and running quickly with training models in the cloud using Distributed Data Parallel (DDP)."
 icon: "cloud"
 ---
 
-<Note>
-Note: This workflow is specifically designed for cloud-based training. For on-device training, refer to the On-Device Training Workflow section.
-</Note>
+## Prerequisites
 
-## Cloud-Based Training with `train_engine`
+Before you begin, ensure you have the following:
+- A Simplifine API key.
+- Access to a cloud GPU (L4 or A100) supported by Simplifine.
 
-This workflow is optimized for cloud environments where resources are managed dynamically, allowing you to focus on fine-tuning without worrying about hardware limitations.
+To obtain a Simplifine API key with free credit, email us [here](mailto:founders@simplifine.com).
 
-```python
-from simplifine_alpha import train_engine
-import wandb
+## Setting Up the Client
+
+The first step is to initialize the Client class with your API key and GPU type. This client will handle communication with the Simplifine servers.
+``` python
+from simplifine_alpha.train_utils import Client
+
+# Initialize the client with your API key and GPU type
+api_key = ''  # Enter your Simplifine API key here
+gpu_type = 'a100'  # 'l4' or 'a100'
+client = Client(api_key=api_key, gpu_type=gpu_type)
+
+```
+<Warning>Replace `''` with your actual Simplifine API key. </Warning>
+<Note>The gpu_type can be `'l4'` or `'a100'`.</Note>
+
+## Training a Model with Data Driven Parallelism (DDP)
+The example below shows how to use DDP to distribute the training process across multiple GPUs.
+
+### Step 1: Define Your Training Job with DDP
+You can train a model using the `sft_train_cloud` method and enable DDP by setting the `use_ddp` parameter to `True`.
+
+``` python
+client.sft_train_cloud(
+    job_name='ddp_job',
+    model_name='EleutherAI/gpt-neo-125M',
+    dataset_name='my_dataset',
+    data_from_hf=True,
+    keys=['title', 'abstract', 'explanation'],
+    data={'title': ['title 1', 'title 2'], 'abstract': ['abstract 1', 'abstract 2'], 'explanation': ['explanation 1', 'explanation 2']},
+    template='### TITLE: {title}\n ### ABSTRACT: {abstract}\n ###EXPLANATION: {explanation}',
+    response_template='###EXPLANATION:',
+    use_zero=False,
+    use_ddp=True
+)
+```
+
+### Step 2: Monitor Your Jobs
+After sending the query, you can check the status of your jobs. The status will be one of the following: `completed`, `in progress`, or `pending`.
+
+``` python
+status = client.get_all_jobs()
+for num, i in enumerate(status[-5:]):
+    print(f'Job {num}: {i}')
+
+```
+<Accordion
+  title="Output Example"
+>
+  ```bash
+  Job 0: {'job_id': '544bb4f0-206f-43b7-850e-5e1e9f7b4d23', 'job_name': 'job-4', 'status': 'completed'}
+Job 1: {'job_id': 'bde91132-9776-41ae-89f9-855dfb116a91', 'job_name': 'ddp_job', 'status': 'completed'}
+Job 2: {'job_id': 'a1ff54dd-5ee2-4e35-9e78-6868f63dad37', 'job_name': 'zero_example_cloud', 'status': 'completed'}
+Job 3: {'job_id': '543d3bc3-3ce4-4af6-9f9a-6c0823dcc9b0', 'job_name': 'ddp_job', 'status': 'in progress'}
+Job 4: {'job_id': '5d55d46a-7793-4c06-9cef-279f03a0f953', 'job_name': 'job_1', 'status': 'pending'}
+  ```
+</Accordion>
+
+### Step 3: Retrieve Training Logs
+You can retrieve the logs for any job to check detailed information about the training process.
+  
+  ``` python
+job_id = status[-1]['job_id']
+logs = client.get_train_logs(job_id)
+print(logs['response'])
+```
+<Accordion
+  title="Output Example"
+>
+  ```bash
+[2024-07-28 18:13:08,712] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+ [WARNING]  async_io requires the dev libaio .so object and headers but these were not found.
+...
+{'train_runtime': 6.5488, 'train_samples_per_second': 73.295, 'train_steps_per_second': 9.162, 'train_loss': 0.1135852018992106, 'epoch': 1.0}
+  ```
+</Accordion>
+
+
+### Step 4: Downloading the Trained Model
+Once your model has finished training, you can download it using the download_model function.
+
+``` python
 import os
+
+# Create a folder to store the model
+os.mkdir('sf_trained_model')
+
+# Download and save the model
+client.download_model(job_id=job_id, extract_to='/content/sf_trained_model')
 ```
 
-## Disable WandB Logging (Optional)
-If you don't need to track your training process with Weights and Biases (WandB), you can disable it using the following code.
+<Accordion
+  title="Output Example"
+>
+  ```bash
+  Directory downloaded successfully and saved to /content/sf_trained_model/5d55d46a-7793-4c06-9cef-279f03a0f953.zip
+Model unzipped successfully to /content/sf_trained_model
+Model downloaded, unzipped, and zip file deleted successfully!
+  ```
+</Accordion>
 
-<Note>
-To enable WandB logging, you'll need a WandB token. Change the mode to 'enabled' if you'd like to activate logging.
-</Note>
+
+<Accordion title="Stop an Ongoing Job (Only if Necessary)">
+You can stop an ongoing job if needed.
 
 ``` python
-# Disabling WandB logging, change if you'd like to have it enabled.
-wandb.init(mode='disabled')
+stop_running_job = False
+if stop_running_job:
+    job_id = status[-1]['job_id']
+    client.stop_job(job_id)
 ```
+</Accordion>
 
-## Dataset Configuration
-### Using a Hugging Face Dataset
-You can provide the name of a Hugging Face (HF) dataset if you'd like to use a pre-existing dataset. Ensure that you adjust the `keys`, `response_template`, and `template` to match your dataset's structure.
-
-```python
-# You can provide an HF dataset name.
-# Be sure to change the keys, response template, and template accordingly.
-template = '''### TITLE: {title}\n ### ABSTRACT: {abstract}\n ###EXPLANATION: {explanation}'''
-response_template='\n ###EXPLANATION:'
-keys = ['title', 'abstract', 'explanation']
-dataset_name=''
-```
-
-### Using a Local Dataset
-If you don't want to use a Hugging Face dataset, set from_hf to False and provide a local dataset. The example below shows how to manually create a dataset:
+### Step 5: Loading and Using the Trained Model
+Finally, you can load the trained model and tokenizer to generate text.
 
 ``` python
-from_hf = True
-if True:  # Change this if you want to use a local dataset instead of a Hugging Face dataset.
-  from_hf = False
-  data = {
-      'title':['title 1', 'title 2', 'title 3']*200,
-      'abstract':['abstract 1', 'abstract 2', 'abstract 3']*200,
-      'explanation':['explanation 1', 'explanation 2', 'explanation 3']*200
-  }
-```
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
-## Model Selection
-Choose a model for training. 
-``` python
-# You can change the model. Bigger models might throw OOM errors.
-model_name = 'EleutherAI/pythia-160m'
-```
-<Warning>
-Large models may cause OOM errors, especially in environments with limited GPU memory. Consider using smaller models or utilizing Simplifine's other GPU offerings.
-</Warning>
+path = '/content/sf_trained_model'
+sf_model = AutoModelForCausalLM.from_pretrained(path)
+sf_tokenizer = AutoTokenizer.from_pretrained(path)
 
-## Initiating Cloud-Based Training
-Finally, use the train_engine.hf_sft function to start training in the cloud. The parameters allow you to control the training process, including whether to use mixed-precision training (`fp16`), distributed data parallel (`ddp`), and more
+input_example = '''### TITLE: title 1\n ### ABSTRACT: abstract 1\n ###EXPLANATION: '''
 
-``` python
-train_engine.hf_sft(model_name, from_hf=from_hf, dataset_name=dataset_name,
-        keys = keys, data = data,
-        template = template,
-        response_template=response_template, zero=False, ddp=False, gradient_accumulation_steps=4, fp16=True, max_seq_length=2048)
+input_example = sf_tokenizer(input_example, return_tensors='pt')
+
+output = sf_model.generate(input_example['input_ids'],
+                           attention_mask=input_example['attention_mask'],
+                           max_length=30,
+                           eos_token_id=sf_tokenizer.eos_token_id,
+                           early_stopping=True,
+                           pad_token_id=sf_tokenizer.eos_token_id
+)
+
+print(sf_tokenizer.decode(output[0]))
 ```
-<Tip>
-  For efficient cloud training, consider adjusting gradient_accumulation_steps and using mixed-precision (`fp16=True`) to reduce memory usage.
-</Tip>
+---
+This quickstart guide covers setting up the client, training a model using DDP, monitoring jobs, downloading the trained model, and using it for inference. Let me know if you need any further adjustments!
