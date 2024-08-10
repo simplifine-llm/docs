@@ -1,7 +1,7 @@
 ### WandB Config
 
 ```python
-class wandbConfig:
+train_engine.wandbConfig:
     wandb_api_key:str
     project:str
     config:dict
@@ -16,7 +16,7 @@ class wandbConfig:
 ### Prompt Config
 
 ```python
-class PromptConfig:
+train_engine.PromptConfig:
     new_padding_token: Optional[str] = None
     use_chat_template: Optional[bool] = False
     system_message_key: Optional[str] = None
@@ -40,7 +40,7 @@ class PromptConfig:
 ### SFT Prompt Config
 
 ```python
-class sftPromptConfig(PromptConfig):
+train_engine.sftPromptConfig(PromptConfig):
     keys: List[str] = field(default_factory=list)
     template: str = ""
     response_template: str = ""
@@ -51,3 +51,36 @@ class sftPromptConfig(PromptConfig):
 `template`: the prompt template used for SFT (e.g. `"### QUESTION {question}, ###ANSWER: {answer}"`). This will be formated by the keys provided. 
 
 `response_template`: The tempalte used to train the LLM for SFT. (e.g. `###ANSWER`).
+
+```python
+inference_tools.GenerationConfig:
+    train_type:str
+    max_length:int
+    num_return_sequences:int
+    do_sample:bool
+    top_k:int
+    top_p:float
+    temperature:float
+    prompt_template:str
+    response_template:str
+    keys:list
+```
+`train_type`: currently only accepted formats are `sft` or `clm`. 
+
+`max_length`: maximum length of the generated sequence with the model.
+
+`num_return_sequences`: number of sequences generated.
+
+`do_sample`: weather to sample from the output logits or no. 
+
+`top_k`: top k tokens based on the probability.
+
+`top_p`: this would define the top tokens that are above the certai probability. 
+
+`tempreture`: this defines the "randomness" in the sampling process.
+
+`prompt_template`: the template used for a SFT training process. This is set in the 'sftPromptConfig`. 
+
+`response_template`: This is the response template used in SFT training, set in the `sftPromptConfig`. 
+
+`keys`: keys used during the SFT training process, used in `sftPromptConfig`. 
