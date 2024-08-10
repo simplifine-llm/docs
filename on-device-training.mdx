@@ -4,13 +4,14 @@ description: "Learn how to train models on your device using Simplifine."
 icon: "computer"
 ---
 
+//TODO - Update with the config schema
 <Note>
 Note: This workflow is specifically designed for cloud-based training. For on-device training, refer to the On-Device Training Workflow section.
 </Note>
 
-## Cloud-Based Training with `train_engine`
+## On-Device Training with `train_engine`
 
-This workflow is optimized for cloud environments where resources are managed dynamically, allowing you to focus on fine-tuning without worrying about hardware limitations.
+This workflow is optimized for training on your own infrastucture.
 
 ```python
 from simplifine_alpha import train_engine
@@ -19,10 +20,10 @@ import os
 ```
 
 ## Disable WandB Logging (Optional)
-If you don't need to track your training process with Weights and Biases (WandB), you can disable it using the following code.
+WandB logging can be passed as the value of the arguement `report_to` in the training arguments objects passed to the trainer. It can be fully deactivated as follows:
 
 <Note>
-To enable WandB logging, you'll need a WandB token. Change the mode to 'enabled' if you'd like to activate logging.
+WandB logging is enabled by default. 
 </Note>
 
 ``` python
@@ -40,7 +41,7 @@ You can provide the name of a Hugging Face (HF) dataset if you'd like to use a p
 template = '''### TITLE: {title}\n ### ABSTRACT: {abstract}\n ###EXPLANATION: {explanation}'''
 response_template='\n ###EXPLANATION:'
 keys = ['title', 'abstract', 'explanation']
-dataset_name=''
+dataset_name='REPLACE_WITH_HF_DATASET_NAME'
 ```
 
 ### Using a Local Dataset
@@ -71,10 +72,19 @@ Large models may cause OOM errors, especially in environments with limited GPU m
 Finally, use the train_engine.hf_sft function to start training in the cloud. The parameters allow you to control the training process, including whether to use mixed-precision training (`fp16`), distributed data parallel (`ddp`), and more
 
 ``` python
-train_engine.hf_sft(model_name, from_hf=from_hf, dataset_name=dataset_name,
-        keys = keys, data = data,
-        template = template,
-        response_template=response_template, zero=False, ddp=False, gradient_accumulation_steps=4, fp16=True, max_seq_length=2048)
+
+train_engine.hf_sft(model_name,
+                    from_hf=from_hf
+                    dataset_name=dataset_name,
+                    keys = keys,
+                    data = data,
+                    template = template,
+                    response_template=response_template, 
+                    zero=False,
+                    ddp=False,
+                    gradient_accumulation_steps=4,
+                    fp16=True,
+                    max_seq_length=2048)
 ```
 <Tip>
   For efficient cloud training, consider adjusting gradient_accumulation_steps and using mixed-precision (`fp16=True`) to reduce memory usage.
