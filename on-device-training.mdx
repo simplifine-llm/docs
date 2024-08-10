@@ -10,54 +10,54 @@ This section shows how to use Simplifine to train an LLM for supervised fine-tun
 
 ## Config objects for simplifine
 
-There are 3 main configurations that are passed to a simplfiine trainer function. The SFTConfig from huggingface's trl library, the prompt config indicating the prompt template, response tempalte and so on, and the wandb config for logging. 
-
-## Dataset Configuration
-### Using a Hugging Face Dataset
-You can provide the name of a Hugging Face (HF) dataset if you'd like to use a pre-existing dataset. Ensure that you adjust the `keys`, `response_template`, and `template` to match your dataset's structure.
+There are different types of dataclasses (or configs) used in simplifine. We configure the prompt config (sft prompt config in this case) and huggingface's SFTConfig in this example. We also define the name of the model and the dataset that is being used.
 
 ```python
-# You can provide an HF dataset name.
-# Be sure to change the keys, response template, and template accordingly.
-template = '''### TITLE: {title}\n ### ABSTRACT: {abstract}\n ###EXPLANATION: {explanation}'''
-response_template='\n ###EXPLANATION:'
-keys = ['title', 'abstract', 'explanation']
-dataset_name=''
+from simplifine_alpha import train_engine
+from trl import SFTConfig
+
+dataset_name = 'community-datasets/fake_news_english'
+model_name = 'TinyLlama/TinyLlama-1.1B-Chat-v1.0'
+
+# defining prompt config
+sft_prompt_config = train_engine.sftPromptConfig(
+  keys = ['url_of_article', 'fake_or_satire'],
+  template = "###URL: {url_of_article}. \n###CLS: {fake_or_satire}",
+  response_template = '. \n###CLS: ',
+  use_chat_template=True
+  )
+
+# defining training config
+sft_config = SFTConfig(
+    output_dir='/content/fake_news_english_phi3',
+    per_device_train_batch_size=1,
+    gradient_accumulation_steps=4,
+    learning_rate=1e-5,
+    num_train_epochs=2,
+    report_to='none',
+    fp16=True,
+    gradient_checkpointing=True,
+)
 ```
+
 
 ### Using a Local Dataset
-If you don't want to use a Hugging Face dataset, set from_hf to False and provide a local dataset. The example below shows how to manually create a dataset:
+If you don't want to use a Hugging Face dataset, set `data_from_hf` to False and provide a local dataset. The example below shows how to manually create a dataset:
 
 ``` python
-from_hf = True
-if True:  # Change this if you want to use a local dataset instead of a Hugging Face dataset.
-  from_hf = False
-  data = {
-      'title':['title 1', 'title 2', 'title 3']*200,
-      'abstract':['abstract 1', 'abstract 2', 'abstract 3']*200,
-      'explanation':['explanation 1', 'explanation 2', 'explanation 3']*200
-  }
+data = {'url_of_article': ['url1','url2','url3'],
+        'fake_or_satire':[1,0,1]
+      }
 ```
 
-## Model Selection
-Choose a model for training. 
-``` python
-# You can change the model. Bigger models might throw OOM errors.
-model_name = 'EleutherAI/pythia-160m'
-```
-<Warning>
-Large models may cause OOM errors, especially in environments with limited GPU memory. Consider using smaller models or utilizing Simplifine's other GPU offerings.
-</Warning>
+## Initiating local training
+You can finally call the function to initate the training like this: 
 
-## Initiating Cloud-Based Training
-Finally, use the train_engine.hf_sft function to start training in the cloud. The parameters allow you to control the training process, including whether to use mixed-precision training (`fp16`), distributed data parallel (`ddp`), and more
-
-``` python
-train_engine.hf_sft(model_name, from_hf=from_hf, dataset_name=dataset_name,
-        keys = keys, data = data,
-        template = template,
-        response_template=response_template, zero=False, ddp=False, gradient_accumulation_steps=4, fp16=True, max_seq_length=2048)
+```python
+train_engine.sft_train(model_name=model_name, dataset_name=dataset_name,
+                       sft_config = sft_config, sft_prompt_config=sft_prompt_config,
+                       use_zero=False, use_ddp=False
+                      )
 ```
-<Tip>
-  For efficient cloud training, consider adjusting gradient_accumulation_steps and using mixed-precision (`fp16=True`) to reduce memory usage.
-</Tip>
+
+Note that this has DDP and ZeRO disabled. If you wish to use these features, then this function needs to be in a script, and you need to run the script using `torchrun`.
