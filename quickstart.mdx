@@ -1,50 +1,38 @@
 ---
-title: "Quickstart"
-description: "Simplifine is an open-source Python library designed to streamline the fine-tuning of large language models (LLMs). From training to evaluation to serving, we got your back!"
-icon: "rocket"
+title: "Getting Started on Simplifine"
+description: "Navigating Simplifine Interface, Workspace"
 ---
 
-## Installation
+# **Simplifine Workspace**
 
-To get started with Simplifine, you need to install the library. You can do this easily using pip:
+The Simplifine interface is designed for smooth navigation, enabling you to manage files, collaborate with AI agents, and organize your notes efficiently. **Workspace** is the interface that you see first when you log in. It is composed of four primary tabs, accessible through **Sidebar.**
 
-```python
-pip install simplifine-alpha
-```
+## **Sidebar**
 
-To get access to the most up-to-date features, you can install the library from the GitHub repository:
+**Sidebar** is your primary navigation hub, providing access to **Project Space**, **Library**, **Notebook**, and **Settings**. Use it to switch between sections effortlessly and maintain an organized workflow. Using the Sidebar, you can also join our community on [Discord](https://discord.com/invite/vvJ6A7MrMv) and [Slack](https://simplifineusers.slack.com/ssb/redirect), and quickly send just your feedback, bug reports, and feature requests using the "**Feedback**" button. We value our users and take all submissions very seriously.
 
-```python
-pip install git+https://github.com/simplifine-llm/Simplifine.git
-```
+![Use Sidebar](Sidebar.gif)
 
-<Warning>Python 3.7 or later required. </Warning>
+## **Project Space**&#x20;
 
-<Warning>For any issues installing, email <a href="mailto:founders@simplifine.com">founders@simplifine.com</a>. We will get you set up ASAP. </Warning>
+**Project Space** is where you manage your Projects, acting as dedicated workspaces where all files, notes, and resources for each research endeavor are housed. Here you can create, edit, delete, and open your Projects.
 
-<Accordion title="Troubleshooting">
-  ### `RuntimeError: Error building extension 'cpu_adam' python dev`
+### How to Create a Project on Simplifine?
 
-  This happens when python-dev is not installed and offload is being used by ZeRO. simple try:
+To create a Project for the first time, click on the circular "**(+)"** button at the center of the screen. Then name your Project and, optionally, add your Project details in the window that pops up.
 
-  ```bash
-  apt-get install python3-dev
-  ```
-</Accordion>
+To create a Project after your first one, click on "**Create Project**" button at the top right corner of Project Space. Then name your Project and, optionally, add your Project details in the window that pops up.
 
-## Cloud API Key Setup (Optional)
+![Create Project](CreateProject.gif)
 
-To use Simplifine's cloud compute for training, you need to set up an API key.
-For this, you need to express interest for a free API Key on [Simplifine](https://www.simplifine.com/api-key-interest). Turnaround time is 24 hours.
+## **Library**&#x20;
 
-<Note>You can use Simplifine without an API Key for any on-device job.</Note>
+Your documents are kept in your **Library**. Supporting various file types, including PDFs and CSVs in the Free Plan, the Library consolidates diverse data sources in one place. Here you can upload documents via file selection or drag-and-drop, tag files to categorize them for quick retrieval and analysis, delete files to streamline your workspace, organize files into folders, and add descriptions. To view and annotate your documents outside a Project, you can also use your Library and click on the file you want to open.
 
-<CardGroup>
-  <Card title="License" icon="file" href="/license/license">
-    We are GNU GPL 3.0 licensed. Check out our license for more details.
-  </Card>
+## Notebook
 
-  <Card title="Contribute to our Community" icon="github" href="https://github.com/simplifine-llm/Simplifine">
-    Join our community and contribute to our open-source project to make LLM fine-tuning accessible to everyone.
-  </Card>
-</CardGroup>
+**Notebook** works like your **Library,** but instead of the files you upload or save on Simplifine, it is for the ones you create. So, Notebook view allows you to see all your Notes across all Projects. To view and edit your documents outside a Project, you can open your Notebook and can click on the file you want to access. &#x20;
+
+## **Settings**&#x20;
+
+Using the **Settings** page, you can update your account information.

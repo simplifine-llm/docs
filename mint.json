@@ -17,21 +17,18 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
+      "name": "Email Support",
       "url": "mailto:founders@simplifine.com"
     },
     {
       "name": "Discord",
       "url": "https://discord.gg/QYp669Suap"
-    },
-    {
-      "name": "Github",
-      "url": "https://github.com/simplifine-llm/Simplifine"
     }
+
   ],
   "topbarCtaButton": {
-    "name": "Free Credit",
-    "url": "https://www.simplifine.com/api-key-interest"
+    "name": "Login",
+    "url": "https://app.simplifine.com"
   },
   "tabs": [
     {
@@ -41,53 +38,14 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Overview",
       "pages": [
-        "quickstart",
-        "simplifine-cloud-setup",
-        "on-device-training"
+        "quickstart"
       ]
-    },
-    {
-    "group": "Training",
-     "pages": [
-        "training/sft_train",
-        "training/hf_sft", 
-        "training/clm_train",
-        "training/hf_clm_train",
-        "training/hf_clf_multi_label_train",
-        "training/hf_clf_train",
-        "training/hf_finetune_llm_qa"
-        ]
-      },
-    {
-      "group": "Evaluation",
-      "pages": [
-        "Start"
-        ]
-      },
-    {
-      "group": "Inference",
-      "pages": [
-        "inference/generate_from_pretrained"
-        ]
-      },
-    {
-      "group": "Cloud", 
-      "pages": [
-        "cloud/client",
-        "cloud/sft_train_cloud",
-        "cloud/clm_train_cloud"
-        ]
-      },
-    {"group": "API", "pages": ["Start"]},
-    {"group": "Troubleshooting", "pages": ["Start"]}
-
+    }
   ],
   "footerSocials": {
-    "github": "https://github.com/simplifine-llm/Simplifine",
-    "linkedin": "https://www.linkedin.com/company/100529065"
+    "linkedin": "https://www.linkedin.com/company/100529065",
+    "twitter": "https://x.com/simplifine2024"
   }
-
-  
 }
