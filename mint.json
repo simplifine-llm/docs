@@ -42,6 +42,12 @@
       "pages": [
         "quickstart"
       ]
+    },
+    {
+      "group": "Projectspace",
+      "pages": [
+        "project"
+      ]
     }
   ],
   "footerSocials": {
