@@ -22,7 +22,7 @@
     },
     {
       "name": "Discord",
-      "url": "https://discord.gg/QYp669Suap"
+      "url": "https://discord.com/invite/vvJ6A7MrMv"
     }
 
   ],
@@ -44,14 +44,34 @@
       ]
     },
     {
-      "group": "Projectspace",
+      "group": "Project Space",
       "pages": [
         "project"
+      ]
+    },
+    {
+      "group": "Search",
+      "pages": [
+        "search"
+      ]
+    },
+    {
+      "group": "Saving",
+      "pages": [
+        "saving"
+      ]
+    },
+    {
+      "group": "Read",
+      "pages": [
+        "read"
       ]
     }
   ],
   "footerSocials": {
     "linkedin": "https://www.linkedin.com/company/100529065",
-    "twitter": "https://x.com/simplifine2024"
+    "twitter": "https://x.com/simplifine2024",
+    "discord": "https://discord.com/invite/vvJ6A7MrMv",
+    "slack": "https://simplifineusers.slack.com/ssb/redirect"
   }
 }
