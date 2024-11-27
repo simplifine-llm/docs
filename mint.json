@@ -2,17 +2,17 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Simplifine",
   "logo": {
-    "dark": "/logo/simplifine dark background.jpeg",
-    "light": "logo/simplifine logo.jpeg"
+    "dark": "/logo/simplifine-dark-background.jpeg",
+    "light": "/logo/simplifine-logo.jpeg"
   },
-  "favicon": "logo/siimplifine logo solo.jpeg",
+  "favicon": "/logo/simplifine-logo-solo.jpeg",
   "colors": {
-    "primary": "#7437BC",
-    "light": "#f5b5f9",
-    "dark": "#7437BC",
+    "primary": "#FF5349",
+    "light": "#FF5F15",
+    "dark": "#FF5F15",
     "anchors": {
       "from": "#0D9373",
-      "to": "#f5b5f9"
+      "to": "#FF5F15"
     }
   },
   "topbarLinks": [
@@ -31,40 +31,56 @@
     "url": "https://app.simplifine.com"
   },
   "tabs": [
-    {
-      "name": "License",
-      "url": "license/license.mdx"
-    }
   ],
   "navigation": [
     {
       "group": "Overview",
       "pages": [
-        "quickstart"
+        "pages/quickstart"
       ]
     },
     {
       "group": "Project Space",
       "pages": [
-        "project"
+        "pages/project"
+      ]
+    },
+    {
+      "group": "Tables & Sheets",
+      "pages": [
+        "pages/sheet"
       ]
     },
     {
       "group": "Search",
       "pages": [
-        "search"
-      ]
-    },
-    {
-      "group": "Saving",
-      "pages": [
-        "saving"
+        "pages/search"
       ]
     },
     {
       "group": "Read",
       "pages": [
-        "read"
+        "pages/read",
+        "pages/ai-read"
+      ]
+    },
+    {
+      "group": "Write",
+      "pages": [
+        "pages/editor",
+        "pages/ai-write"
+      ]
+    },
+    {
+      "group": "Annotate",
+      "pages": [
+        "pages/annotations"
+      ]
+    },
+    {
+      "group": "Save",
+      "pages": [
+        "pages/saving"
       ]
     }
   ],
