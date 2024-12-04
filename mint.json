@@ -82,6 +82,12 @@
       "pages": [
         "pages/saving"
       ]
+    },
+    {
+      "group": "Chat",
+      "pages": [
+        "pages/chat"
+      ]
     }
   ],
   "footerSocials": {
